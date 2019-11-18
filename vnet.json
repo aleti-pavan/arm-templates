@@ -1,0 +1,70 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "prefix": {
+        "type": "string",
+        "defaultValue": "healthcare",
+        "metadata": {
+          "description": "Prefix for All the resources"
+        }
+      },
+      "vnetPrefix": {
+          "type": "string",
+          "defaultValue": "10.0.0.0/16",
+          "metadata": {
+              "description": "CIDR block of the VNet"
+          }
+      },
+      "environment": {
+         "type": "string",
+         "allowedValues": [
+              "dev",
+              "test",
+              "prod"
+         ]
+  }
+    },
+    "resources": [
+        {
+            "name": "[variables('vnetName')]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2015-06-15",
+            "dependsOn": [],
+            "tags": {
+                "displayName": "[variables('vnetName')]",
+                "environment" : "[variables('environment')]"
+            },
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('vnetPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[concat(variables('subName'), copyIndex())]",
+                        "properties"
+                            "addressPrefix": "[concat('10.0',copyIndex(1),'0/24')]",
+                            "copy": {
+                                "name": "subnetcopy",
+                                "count": 6
+                            }
+                    }
+                ]
+                    }
+                
+            }
+        
+    ],
+    "variables": {
+        "vnetName": "[concat(toLower(parameters('prefix')), uniqueString(resourceGroup().id))]",
+        "subName": "[concat(toLower(parameters('prefix')))]",
+        "environment": "[toLower(parameters('environment'))]",
+        "somethingSubnet1Name": "Subnet-1",
+        "somethingSubnet1Prefix": "10.0.1.0/24",
+        "somethingSubnet2Name": "Subnet-2",
+        "somethingSubnet2Prefix": "10.0.2.0/24"
+    }
+}
