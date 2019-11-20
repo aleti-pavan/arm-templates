@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "variables": {
+    "nestedTemplates": {
+      "logAnalytics": "/nestedtemplates/logs/log-analytics.json"}
+  },
+  
+"resources": [
+    {
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2018-05-01",
+        "name": "log-workspace",
+        "dependsOn": [ ],
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "[uri(deployment().properties.templateLink.uri,'/logs/log-analytics.json')]",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "name": {
+                "value": "aleti-log1"
+            },
+            "sku": {
+                "value": "Free"
+            }
+        }
+        }
+      }
+]
+}
