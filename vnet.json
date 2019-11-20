@@ -45,8 +45,9 @@
                 "subnets": [
                     {
                         "name": "[concat(variables('subName'), copyIndex())]",
-                        "properties"
-                            "addressPrefix": "[concat('10.0',copyIndex(1),'0/24')]",
+                        "properties":{
+                            "addressPrefix": "[concat('10.0',copyIndex(1),'0/24')]"
+                        },
                             "copy": {
                                 "name": "subnetcopy",
                                 "count": 6
