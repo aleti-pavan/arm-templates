@@ -12,5 +12,5 @@ Validate ARM template with azure cli
 master json validate and create
 
 ```az group deployment validate --template-file master.json --resource-group my-rg | jq
-az group deployment create --template-file master.json --resource-group my-rg | jq```
+az group deployment create --template-file master.json --resource-group my-rg | jq
 
