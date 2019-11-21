@@ -2,8 +2,16 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
     "contentVersion": "1.0.0.0",
     "variables": {
+    "project":"test",
     "nestedTemplates": {
-      "logAnalytics": "/nestedtemplates/logs/log-analytics.json"}
+      "logAnalytics": "/nestedtemplates/logs/log-analytics.json",
+      "frontdoor": "https://raw.githubusercontent.com/aleti-pavan/arm-templates/develop/nestedtemplates/frontdoor/azuredeploy.json",
+      "frontdoorParams": "https://raw.githubusercontent.com/aleti-pavan/arm-templates/develop/nestedtemplates/frontdoor/azuredeploy.parameters.json"
+    },
+    "frontdoor": {
+     "frontDoorName": "[concat(variables('project'),substring(uniqueString(resourceGroup().id),0,2))]",
+     "backendAddress": "[concat(variables('project'),resourceGroup().id)]"
+    }
   },
   
 "resources": [
@@ -15,16 +23,12 @@
         "properties": {
           "mode": "Incremental",
           "templateLink": {
-            "uri": "[uri(deployment().properties.templateLink.uri,'/logs/log-analytics.json')]",
+            "uri": "[variables('nestedTemplates').frontdoor]",
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
-            "name": {
-                "value": "aleti-log1"
-            },
-            "sku": {
-                "value": "Free"
-            }
+            "frontDoorName": {"value": "[variables('frontdoor').frontDoorName]"},
+            "backendAddress": {"value": "50.22.3.49"}
         }
         }
       }
