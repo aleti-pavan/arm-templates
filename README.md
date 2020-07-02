@@ -13,11 +13,11 @@ We are using `az cli` to deploy `arm templates`. Please follow below steps.
 2. az account show (shows your subscriptions you have access to)
 3. az account set -s <subscriptionId> (sets the subscription to run the commands)
 4. az account show (confirms you the active subscription the commands would run on)
-
+```
 
 Resourse group has to be created at the scope of subsriptions. It would reque `az deployment` instead of `az group deplyment`
 
-
+```
 az deployment validate --template-file nestedtemplates/resourcegroup/resourcegroup.json --parameters @nestedtemplates/resourcegroup/params-resourcegroup.json --location westus
 
 (above command throws you a json if the template is valid)
