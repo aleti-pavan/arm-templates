@@ -33,15 +33,20 @@ Upon successful creation you should see __Resource Group__ in the azure portal a
 
 ![az-create-rg.png](docs/images/az-create-rg.png)
 
-```
+
+### Create VNet
 
 
 Validate ARM template with azure cli
 
-`az group deployment validate --template-file nestedtemplates/logs/log-analytics.json --parameters @nestedtemplates/logs/log-analytics.params.json --resource-group my-rg | jq`
+`az group deployment validate --template-file nestedtemplates/vnet/vnet.json --parameters @nestedtemplates/vnet/params-vnet.json --resource-group my_rg | jq`
 
-`az group deployment create --template-file nestedtemplates/logs/log-analytics.json --parameters @nestedtemplates/logs/log-analytics.params.json --resource-group my-rg | jq`
+(Above command should return a json file, __remove__ `| jq` at the end of the command if you don't `jq` already installed on your machine.)
 
+
+`az group deployment create --template-file nestedtemplates/vnet/vnet.json --parameters @nestedtemplates/vnet/params-vnet.json --resource-group my_rg | jq`
+
+[vnet-create-running.png](docs/images/vnet-create-running.png)
 
 master json validate and create
 
