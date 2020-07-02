@@ -46,7 +46,7 @@ Validate ARM template with azure cli
 
 `az group deployment create --template-file nestedtemplates/vnet/vnet.json --parameters @nestedtemplates/vnet/params-vnet.json --resource-group my_rg | jq`
 
-[vnet-create-running.png](docs/images/vnet-create-running.png)
+![vnet-create-running.png](docs/images/vnet-create-running.png)
 
 master json validate and create
 
