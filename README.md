@@ -17,6 +17,8 @@ We are using `az cli` to deploy `arm templates`. Please follow below steps.
 
 Resourse group has to be created at the scope of subsriptions. It would reque `az deployment` instead of `az group deplyment`
 
+### Create Resource Group
+
 ```
 az deployment validate --template-file nestedtemplates/resourcegroup/resourcegroup.json --parameters @nestedtemplates/resourcegroup/params-resourcegroup.json --location westus
 
