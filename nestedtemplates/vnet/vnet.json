@@ -42,11 +42,9 @@
     },
     "variables": {
         "vnetName": "[concat(toLower(parameters('prefix')))]",
-        "subName": "[concat(substring(toLower(parameters('prefix')),0,2),'-','sub')]",
         "appsubName": "app-gw-sub",
         "kalisubName": "webapp-sub",
         "environment": "[toLower(parameters('environment'))]",
-        "subnetModName": "[substring(variables('subName'),0,sub(length(variables('subName')), 1))]",
         "SeperatedValues": "[split(parameters('vnetPrefix'),'.')]",
         "appnsgName": "[parameters('appnsgName')]"
  
