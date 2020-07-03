@@ -32,11 +32,11 @@
       },
         "subnetCount": {
             "type": "int",
-            "defaultValue": 2,
-            "minValue": 2,
+            "defaultValue": 1,
+            "minValue": 1,
             "maxValue": 10,
             "metadata": {
-                "description": "Number of subnets to deploy, minimum value of 2 and max of 10."
+                "description": "Number of subnets to deploy, minimum value of 1 and max of 10."
                 }
             }
     },
