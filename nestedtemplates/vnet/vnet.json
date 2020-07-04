@@ -41,7 +41,7 @@
             }
     },
     "variables": {
-        "vnetName": "[concat(toLower(parameters('prefix')))]",
+        "vnetName": "[concat(toLower(parameters('prefix')),'-vnet')]",
         "appsubName": "app-sub",
         "dbsubName": "db-sub",
         "environment": "[toLower(parameters('environment'))]",
@@ -78,8 +78,7 @@
                 "location": "[resourceGroup().location]",
                 "properties": {
                     "addressPrefix": "[concat(variables('SeperatedValues')[0],'.',variables('SeperatedValues')[1],'.', copyIndex(1),'.0/24')]",
-                    // "networkSecurityGroup":{
-                    //     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('appnsgName'))]"}
+                    
                 },
                 "copy": {
                     "name": "subnetCount",
