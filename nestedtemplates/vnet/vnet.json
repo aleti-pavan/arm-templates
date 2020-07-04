@@ -42,8 +42,8 @@
     },
     "variables": {
         "vnetName": "[concat(toLower(parameters('prefix')))]",
-        "appsubName": "app-gw-sub",
-        "kalisubName": "webapp-sub",
+        "appsubName": "app-sub",
+        "dbsubName": "db-sub",
         "environment": "[toLower(parameters('environment'))]",
         "SeperatedValues": "[split(parameters('vnetPrefix'),'.')]",
         "appnsgName": "[parameters('appnsgName')]"
@@ -78,8 +78,8 @@
                 "location": "[resourceGroup().location]",
                 "properties": {
                     "addressPrefix": "[concat(variables('SeperatedValues')[0],'.',variables('SeperatedValues')[1],'.', copyIndex(1),'.0/24')]",
-                    "networkSecurityGroup":{
-                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('appnsgName'))]"}
+                    // "networkSecurityGroup":{
+                    //     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('appnsgName'))]"}
                 },
                 "copy": {
                     "name": "subnetCount",
@@ -95,7 +95,7 @@
                 "dependsOn": [
                     "[variables('vnetName')]"
                 ],
-                "name": "[concat(variables('vnetName'),'/',variables('kalisubName'),copyindex(1))]",
+                "name": "[concat(variables('vnetName'),'/',variables('dbsubName'),copyindex(1))]",
                 "location": "[resourceGroup().location]",
                 "properties": {
                     "addressPrefix": "[concat(variables('SeperatedValues')[0],'.',variables('SeperatedValues')[1],'.', add(3,copyIndex(1)),'.0/24')]"
