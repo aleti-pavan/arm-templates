@@ -15,12 +15,12 @@
               "description": "CIDR block of the VNet"
           }
       },  
-      "appnsgName": {
-          "type": "string",
-          "metadata": {
-              "description": "NSG for app subnets"
-          }
-      },
+    //   "appnsgName": {
+    //       "type": "string",
+    //       "metadata": {
+    //           "description": "NSG for app subnets"
+    //       }
+    //   },
       "environment": {
          "type": "string",
          "defaultValue": "dev",
@@ -46,7 +46,7 @@
         "dbsubName": "db-sub",
         "environment": "[toLower(parameters('environment'))]",
         "SeperatedValues": "[split(parameters('vnetPrefix'),'.')]",
-        "appnsgName": "[parameters('appnsgName')]"
+        // "appnsgName": "[parameters('appnsgName')]"
  
     },
     "resources": [
