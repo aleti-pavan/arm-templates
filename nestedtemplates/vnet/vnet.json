@@ -15,12 +15,12 @@
               "description": "CIDR block of the VNet"
           }
       },  
-      "appnsgName": {
-          "type": "string",
-          "metadata": {
-              "description": "NSG for app subnets"
-          }
-      },
+    //   "appnsgName": {
+    //       "type": "string",
+    //       "metadata": {
+    //           "description": "NSG for app subnets"
+    //       }
+    //   },
       "environment": {
          "type": "string",
          "defaultValue": "dev",
@@ -32,23 +32,21 @@
       },
         "subnetCount": {
             "type": "int",
-            "defaultValue": 2,
-            "minValue": 2,
+            "defaultValue": 1,
+            "minValue": 1,
             "maxValue": 10,
             "metadata": {
-                "description": "Number of subnets to deploy, minimum value of 2 and max of 10."
+                "description": "Number of subnets to deploy, minimum value of 1 and max of 10."
                 }
             }
     },
     "variables": {
-        "vnetName": "[concat(toLower(parameters('prefix')))]",
-        "subName": "[concat(substring(toLower(parameters('prefix')),0,2),'-','sub')]",
-        "appsubName": "app-gw-sub",
-        "kalisubName": "webapp-sub",
+        "vnetName": "[concat(toLower(parameters('prefix')),'-vnet')]",
+        "appsubName": "app-sub",
+        "dbsubName": "db-sub",
         "environment": "[toLower(parameters('environment'))]",
-        "subnetModName": "[substring(variables('subName'),0,sub(length(variables('subName')), 1))]",
         "SeperatedValues": "[split(parameters('vnetPrefix'),'.')]",
-        "appnsgName": "[parameters('appnsgName')]"
+        // "appnsgName": "[parameters('appnsgName')]"
  
     },
     "resources": [
@@ -80,8 +78,7 @@
                 "location": "[resourceGroup().location]",
                 "properties": {
                     "addressPrefix": "[concat(variables('SeperatedValues')[0],'.',variables('SeperatedValues')[1],'.', copyIndex(1),'.0/24')]",
-                    "networkSecurityGroup":{
-                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('appnsgName'))]"}
+                    
                 },
                 "copy": {
                     "name": "subnetCount",
@@ -97,7 +94,7 @@
                 "dependsOn": [
                     "[variables('vnetName')]"
                 ],
-                "name": "[concat(variables('vnetName'),'/',variables('kalisubName'),copyindex(1))]",
+                "name": "[concat(variables('vnetName'),'/',variables('dbsubName'),copyindex(1))]",
                 "location": "[resourceGroup().location]",
                 "properties": {
                     "addressPrefix": "[concat(variables('SeperatedValues')[0],'.',variables('SeperatedValues')[1],'.', add(3,copyIndex(1)),'.0/24')]"

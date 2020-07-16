@@ -7,9 +7,10 @@
      },
      "vnetPrefix": {
         "value": "192.168.0.0/16"
-        },
-    "appnsgName":{
-        "value": "networkSecurityGroup1"
-    }
+        }
+        //,
+    // "appnsgName":{
+    //     "value": "appNSG"
+    // }
     }
 }

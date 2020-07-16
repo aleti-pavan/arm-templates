@@ -24,7 +24,7 @@ az deployment validate --template-file nestedtemplates/resourcegroup/resourcegro
 
 (above command throws you a json if the template is valid)
 
-az deployment create --template-file nestedtemplates/resourcegroup/resourcegroup.json --parameters @nestedtemplates/resourcegroup/params-resourcegroup.json --location westus
+az deployment create --template-file nestedtemplates/resourcegroup/resourcegroup.json --parameters @nestedtemplates/resourcegroup/params-resourcegroup.json --location westus --name rg
 ```
 ![azcreate-running](docs/images/az-create-running-status.png)
 
@@ -39,14 +39,18 @@ Upon successful creation you should see __Resource Group__ in the azure portal a
 
 Validate ARM template with azure cli
 
-`az group deployment validate --template-file nestedtemplates/vnet/vnet.json --parameters @nestedtemplates/vnet/params-vnet.json --resource-group my_rg | jq`
+`az group deployment validate --template-file nestedtemplates/vnet/vnet.json --parameters @nestedtemplates/vnet/params-vnet.json --resource-group my-rg | jq`
 
 (Above command should return a json file, __remove__ `| jq` at the end of the command if you don't `jq` already installed on your machine.)
 
 
-`az group deployment create --template-file nestedtemplates/vnet/vnet.json --parameters @nestedtemplates/vnet/params-vnet.json --resource-group my_rg | jq`
+`az group deployment create --template-file nestedtemplates/vnet/vnet.json --parameters @nestedtemplates/vnet/params-vnet.json --resource-group my-rg | jq`
 
 ![vnet-create-running.png](docs/images/vnet-create-running.png)
+
+Upon successful creation you should see __VNet__ in the __Resource Groups__ azure portal as below.
+
+![az-create-vnet.png](docs/images/vaz-create-vnet.png)
 
 master json validate and create
 
